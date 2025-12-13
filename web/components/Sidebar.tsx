@@ -68,7 +68,7 @@ export default function Sidebar() {
     <>
       {/* 1. 모바일 상단 헤더 (모바일에서만 보임) */}
       <div className="md:hidden fixed top-0 left-0 w-full h-16 bg-white border-b border-gray-200 z-40 flex items-center justify-between px-4 shadow-sm">
-        <h1 className="text-lg font-bold text-blue-600">KB Dashboard</h1>
+        <h1 className="text-lg font-bold text-blue-600">부동산 대시보드</h1>
         <button
           onClick={toggleMenu}
           className="p-2 text-gray-600 hover:bg-gray-100 rounded-md"
@@ -92,7 +92,7 @@ export default function Sidebar() {
       {/* 2. 데스크탑 사이드바 (md 이상에서만 보임, 항상 고정) */}
       <aside className="hidden md:block w-64 bg-white border-r border-gray-200 min-h-screen fixed left-0 top-0 overflow-y-auto z-30">
         <div className="p-6 border-b border-gray-100">
-          <h1 className="text-xl font-extrabold text-blue-600">KB Dashboard</h1>
+          <h1 className="text-xl font-extrabold text-blue-600">부동산 대시보드</h1>
         </div>
         <MenuList />
       </aside>

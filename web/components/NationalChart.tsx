@@ -25,7 +25,7 @@ export default function NationalChart({ data, lastDate }: NationalChartProps) {
       <div className="flex items-center justify-between mb-4">
         <Title className="text-gray-900">
             {/* 제목도 데이터에 따라 동적으로 보여주면 좋지만, 일단 고정 */}
-            변동률 차트
+            최근 4주 변동률 차트
         </Title>
         <Text className="text-gray-500">기준일: {lastDate}</Text>
       </div>

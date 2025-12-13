@@ -26,7 +26,7 @@ export default async function Home({ searchParams }: PageProps) {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           {/* 제목 변경 */}
           <h1 className="text-2xl font-bold text-gray-900">
-            부동산 지표 - 수도권뷰
+            수도권뷰
           </h1>
           <DateSelector dates={availableDates} currentDate={currentDate} />
         </div>

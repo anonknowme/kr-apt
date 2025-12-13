@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "부동산 대시보드",
-  description: "KB 부동산 데이터 시각화",
+  description: "부동산 데이터 시각화",
 };
 
 export default function RootLayout({

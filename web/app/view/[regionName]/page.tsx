@@ -32,7 +32,7 @@ export default async function IndividualViewPage({ params, searchParams }: PageP
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <h1 className="text-2xl font-bold text-gray-900">
             {/* 지역명을 제목으로 표시 */}
-            부동산 지표 - {regionName}
+            {regionName}
           </h1>
           <DateSelector dates={availableDates} currentDate={currentDate} />
         </div>

@@ -24,7 +24,7 @@ export default async function NationalViewPage({ searchParams }: PageProps) {
       <div className="max-w-7xl mx-auto space-y-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <h1 className="text-2xl font-bold text-gray-900">
-            부동산 지표 - 전국뷰
+            전국뷰
           </h1>
           <DateSelector dates={availableDates} currentDate={currentDate} />
         </div>
