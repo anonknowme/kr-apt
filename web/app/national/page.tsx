@@ -1,5 +1,5 @@
 // web/app/national/page.tsx
-import { getNationalViewData, getAvailableDates } from "@/lib/db"; // 전국 데이터 함수
+import { getNationalViewData, getAvailableDates } from "@/utils/db"; // 전국 데이터 함수
 import DateSelector from "@/components/DateSelector";
 import DashboardTemplate from "@/components/DashboardTemplate";
 import React from "react";

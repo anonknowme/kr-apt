@@ -1,5 +1,5 @@
 // web/app/page.tsx (메인 페이지)
-import { getCapitalViewData, getAvailableDates } from "@/lib/db"; // 👈 수도권 데이터 함수로 변경
+import { getCapitalViewData, getAvailableDates } from "@/utils/db"; // 👈 수도권 데이터 함수로 변경
 import DateSelector from "@/components/DateSelector";
 import DashboardTemplate from "@/components/DashboardTemplate";
 import React from "react";

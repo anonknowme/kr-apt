@@ -3,7 +3,7 @@
 
 import React from "react";
 import NationalChart from "@/components/NationalChart";
-import { RegionStat } from "@/lib/db";
+import { RegionStat } from "@/utils/db";
 
 interface DashboardTemplateProps {
   rawData: RegionStat[];
