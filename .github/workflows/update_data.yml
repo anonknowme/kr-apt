@@ -1,0 +1,49 @@
+name: Weekly Real Estate Data Update
+
+on:
+  schedule:
+    # 매주 월요일 오전 9시 (KST 기준) 실행
+    # UTC 기준 00:00 -> 한국 시간 09:00
+    - cron: '0 0 * * 5' #5: Friday
+  
+  # GitHub 웹사이트에서 버튼 눌러서 수동으로 실행 가능하게 함
+  workflow_dispatch:
+
+jobs:
+  run-etl:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 저장소의 코드를 내려받음
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. 파이썬 환경 설정 (3.9 버전)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # 3. 라이브러리 설치
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4. 보안 파일 생성 (Secrets에서 꺼내서 파일로 만듦)
+      - name: Create credential files
+        env:
+          GOOGLE_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          # credentials.json 파일 생성
+          echo "$GOOGLE_JSON" > credentials.json
+          
+          # .env 파일 생성
+          echo "SUPABASE_URL=$SUPABASE_URL" >> .env
+          echo "SUPABASE_SERVICE_KEY=$SUPABASE_KEY" >> .env
+
+      # 5. ETL 스크립트 실행
+      - name: Run ETL Script
+        run: python src/etl.py
