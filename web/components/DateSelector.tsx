@@ -1,21 +1,26 @@
-// web/components/DateSelector.tsx
-"use client"; // 클라이언트 컴포넌트 (상호작용 필요)
+"use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation"; // usePathname 추가
 
 interface DateSelectorProps {
-  dates: string[];     // 전체 날짜 목록
-  currentDate: string; // 현재 선택된 날짜
+  dates: string[];
+  currentDate: string;
 }
 
 export default function DateSelector({ dates, currentDate }: DateSelectorProps) {
   const router = useRouter();
+  const pathname = usePathname(); // 현재 페이지 경로 (예: /, /capital)
+  const searchParams = useSearchParams();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedDate = e.target.value;
-    // 날짜를 선택하면 URL을 변경 (예: /?date=2025-12-01)
-    // 서버 컴포넌트인 page.tsx가 이를 감지하고 데이터를 다시 가져옵니다.
-    router.push(`/?date=${selectedDate}`);
+    
+    // 현재 페이지 경로(pathname)를 유지하면서 쿼리 스트링만 교체
+    // 예: /capital?date=2024-11-25
+    const params = new URLSearchParams(searchParams);
+    params.set("date", selectedDate);
+    
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   return (
