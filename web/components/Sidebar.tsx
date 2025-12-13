@@ -5,11 +5,34 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
+// web/components/Sidebar.tsx
+
 const menuItems = [
+    // 1. 메인 뷰
     { name: "수도권뷰", path: "/" },
     { name: "전국뷰", path: "/national" },
-  // { name: "개별뷰", path: "/individual" },
-];
+  
+    // 2. 서울 (핵심 권역별 상세 구분)
+    { name: "서울 강남권", path: "/view/서울 강남권" },
+    { name: "서울 강남 서부권", path: "/view/서울 강남 서부권" },
+    { name: "서울 마용성광", path: "/view/서울 마용성광" },
+    { name: "서울 노도강", path: "/view/서울 노도강" },
+    { name: "서울 기타 강북권", path: "/view/서울 기타 강북권" },
+  
+    // 3. 경기 (권역별 상세 구분)
+    { name: "경기 남부", path: "/view/경기 남부" },     // 과천, 안양 등
+    { name: "경기 동남부1", path: "/view/경기 동남부1" }, // 성남, 용인
+    { name: "경기 동남부2", path: "/view/경기 동남부2" }, // 수원, 화성
+    { name: "경기 남서부", path: "/view/경기 남서부" },   // 광명, 부천 등
+    { name: "경기 북부", path: "/view/경기 북부" },       // 고양, 파주 등
+    { name: "경기 동부", path: "/view/경기 동부" },       // 하남, 남양주 등
+    { name: "경기 최남부", path: "/view/경기 최남부" },   // 평택, 안성 등
+  
+    // 4. 인천
+    { name: "인천", path: "/view/인천" },
+  ];
+  
+  // ... (아래 Sidebar 컴포넌트 코드는 그대로 유지)
 
 export default function Sidebar() {
   const pathname = usePathname();
