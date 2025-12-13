@@ -1,4 +1,4 @@
-import { getIndividualViewData, getAvailableDates } from "@/lib/data";
+import { getIndividualViewData, getAvailableDates } from "@/lib/db";
 import DateSelector from "@/components/DateSelector";
 import DashboardTemplate from "@/components/DashboardTemplate";
 import React from "react";
