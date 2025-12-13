@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const menuItems = [
-  { name: "전국뷰", path: "/" },
-  { name: "수도권뷰", path: "/capital" },
+    { name: "수도권뷰", path: "/" },
+    { name: "전국뷰", path: "/national" },
   // { name: "개별뷰", path: "/individual" },
 ];
 
