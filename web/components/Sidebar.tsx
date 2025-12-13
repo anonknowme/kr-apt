@@ -3,41 +3,98 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const menuItems = [
   { name: "전국뷰", path: "/" },
   { name: "수도권뷰", path: "/capital" },
-  // 나중에 '개별뷰'도 여기에 추가하면 됩니다.
+  // { name: "개별뷰", path: "/individual" },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false); // 모바일 메뉴 열림 상태
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
+
+  // 공통 메뉴 리스트 컴포넌트
+  const MenuList = () => (
+    <nav className="p-4 space-y-1">
+      {menuItems.map((item) => {
+        const isActive = pathname === item.path;
+        return (
+          <Link
+            key={item.path}
+            href={item.path}
+            onClick={closeMenu} // 모바일에서 클릭 시 메뉴 닫기
+            className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+              isActive
+                ? "bg-blue-50 text-blue-700"
+                : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+            }`}
+          >
+            {item.name}
+          </Link>
+        );
+      })}
+    </nav>
+  );
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 min-h-screen fixed left-0 top-0 overflow-y-auto">
-      <div className="p-6 border-b border-gray-100">
-        <h1 className="text-xl font-extrabold text-blue-600">KB Dashboard</h1>
+    <>
+      {/* 1. 모바일 상단 헤더 (모바일에서만 보임) */}
+      <div className="md:hidden fixed top-0 left-0 w-full h-16 bg-white border-b border-gray-200 z-40 flex items-center justify-between px-4 shadow-sm">
+        <h1 className="text-lg font-bold text-blue-600">KB Dashboard</h1>
+        <button
+          onClick={toggleMenu}
+          className="p-2 text-gray-600 hover:bg-gray-100 rounded-md"
+        >
+          {/* 햄버거 아이콘 SVG */}
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            {isOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
       </div>
-      <nav className="p-4 space-y-1">
-        {menuItems.map((item) => {
-          // 현재 페이지인지 확인 (활성화 표시)
-          const isActive = pathname === item.path;
+
+      {/* 2. 데스크탑 사이드바 (md 이상에서만 보임, 항상 고정) */}
+      <aside className="hidden md:block w-64 bg-white border-r border-gray-200 min-h-screen fixed left-0 top-0 overflow-y-auto z-30">
+        <div className="p-6 border-b border-gray-100">
+          <h1 className="text-xl font-extrabold text-blue-600">KB Dashboard</h1>
+        </div>
+        <MenuList />
+      </aside>
+
+      {/* 3. 모바일 사이드바 드로어 (isOpen일 때만 보임) */}
+      {isOpen && (
+        <div className="md:hidden fixed inset-0 z-50 flex">
+          {/* 배경 어둡게 (클릭 시 닫힘) */}
+          <div 
+            className="fixed inset-0 bg-black/50 transition-opacity" 
+            onClick={closeMenu}
+          />
           
-          return (
-            <Link
-              key={item.path}
-              href={item.path}
-              className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                isActive
-                  ? "bg-blue-50 text-blue-700"
-                  : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-              }`}
-            >
-              {item.name}
-            </Link>
-          );
-        })}
-      </nav>
-    </aside>
+          {/* 슬라이드 메뉴 */}
+          <aside className="relative w-64 bg-white h-full shadow-xl animate-slide-in">
+            <div className="p-4 border-b border-gray-100 flex justify-between items-center">
+              <h1 className="text-xl font-extrabold text-blue-600">메뉴</h1>
+              <button onClick={closeMenu} className="text-gray-500">
+                ✕
+              </button>
+            </div>
+            <MenuList />
+          </aside>
+        </div>
+      )}
+    </>
   );
 }
