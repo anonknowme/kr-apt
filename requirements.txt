@@ -1,0 +1,7 @@
+pandas
+requests
+supabase
+gspread
+gspread-dataframe
+python-dotenv
+openpyxl
